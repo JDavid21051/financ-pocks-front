@@ -1,0 +1,17 @@
+
+.p-selectbutton {
+  &.suze__md {
+    .p-button {
+      font-size: 0.8rem;
+    }
+  }
+  .p-button {
+    padding: 0.4rem 0.5rem;
+    min-width: 3rem;
+    justify-content: center;
+
+    &.p-highlight {
+      background: gray;
+    }
+  }
+}

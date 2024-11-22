@@ -1,0 +1,21 @@
+{
+  "app": {
+    "header": {
+      "logo": {
+        "alt": "Financial pockets logo"
+      },
+      "lang": {
+        "toggle": {
+          "es": {
+            "label": "ES",
+            "tooltip": "Select spanish language"
+          },
+          "en": {
+            "label": "EN",
+            "tooltip": "Select english language"
+          }
+        }
+      }
+    }
+  }
+}

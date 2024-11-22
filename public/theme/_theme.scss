@@ -1,0 +1,35 @@
+@import "primeng/resources/themes/mdc-dark-indigo/theme.css";
+@import "primeng/resources/primeng.css";
+@import 'primeflex/primeflex';
+@import 'primeflex/themes/primeone-dark';
+@import "primeicons/primeicons.css";
+@import "extends/selected-button";
+@import "extends/button";
+@import "extends/avatar";
+@import "variables";
+
+* {
+  box-sizing: border-box;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+@mixin flex_fabric ($js, $al, $dir: 'column') {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $js;
+  align-items: $al;
+}
+
+
+.f_horizontal_center {
+  @include flex_fabric(center, center);
+}
+
+.f_horizontal_btw_center {
+  @include flex_fabric(content-between, center);
+}
