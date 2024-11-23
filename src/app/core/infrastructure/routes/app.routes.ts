@@ -41,7 +41,19 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: 'home',
-        loadComponent: () => import('../../../modules/home/presentation/home-page'),
+        loadComponent: () => import('@modules/home/presentation/home-page'),
+      },
+      {
+        path: 'entities',
+        loadComponent: () => import('@modules/entities/container/container-entities-list'),
+      },
+      {
+        path: 'savings',
+        loadComponent: () => import('@modules/savings/container/container-savings-list'),
+      },
+      {
+        path: 'accounts',
+        loadComponent: () => import('@modules/accounts/container/container-accoutns-list'),
       },
       {
         path: '**',

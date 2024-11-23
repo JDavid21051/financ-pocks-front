@@ -1,11 +1,10 @@
 <header class="sticky top-0">
   <ul class="m-0 px-3 flex gap-2 w-full h-fit justify-content-between align-items-center">
     <pock-link-logo />
-    <section class="f_horizontal_center">
+    <section class="f_horizontal_center gap-2">
       @for (item of menuItems; track item.route) {
         <li>
           <a mat-button
-             class="h-fit"
              routerLinkActive="active"
              [routerLink]="item.route">
             {{ item.label }}
