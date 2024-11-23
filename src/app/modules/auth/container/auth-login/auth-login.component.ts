@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
 import {TranslatePipe} from '@ngx-translate/core';
 import {LinkLogoComponent} from '@shared/design/molecules/link-logo/link-logo.component';
 import {LoginFormComponent} from '@modules/auth/presentation/login-form/login-form.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'pock-auth-login',
@@ -17,6 +18,9 @@ import {LoginFormComponent} from '@modules/auth/presentation/login-form/login-fo
   styleUrl: './auth-login.component.scss'
 })
 export class AuthLoginComponent {
-  readonly logoUrl = 'images/logotype.png';
+  private readonly router = inject(Router);
 
+  onClickForm(): void {
+    this.router.navigate(['main/home']).then();
+  }
 }

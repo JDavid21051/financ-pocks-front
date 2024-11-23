@@ -1,23 +1,24 @@
-<form [formGroup]="form" class="f_vertical_start_center gap-4">
+<form [formGroup]="form" class="f_vertical_start_center gap-2">
   <section class="w-full">
-    <p-floatLabel>
-      <input pInputText id="username" formControlName="username" class="w-full"/>
-      <label for="username">Correo electrónico</label>
-    </p-floatLabel>
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Correo electrónico</mat-label>
+      <input formControlName="username" matInput placeholder="correo@mail.com">
+      <mat-icon matSuffix>mail</mat-icon>
+    </mat-form-field>
   </section>
   <section class="w-full">
-    <p-floatLabel>
-      <p-password id="password" formControlName="password" styleClass="w-full" inputStyleClass="w-full"
-                  [feedback]="false" [toggleMask]="true"/>
-      <label for="password">Contraseña</label>
-    </p-floatLabel>
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Contraseña</mat-label>
+      <input formControlName="password" matInput placeholder="************" [type]="passwordFieldType()">
+      <mat-icon matSuffix class="cursor-pointer" (click)="onClickTogglePasswordVisibility()">{{passwordIcon()}}</mat-icon>
+    </mat-form-field>
   </section>
-  <section class="w-full flex justify-content-end">
+  <section class="w-full flex flex-column gap-3 align-items-end justify-content-end">
     <a class="custom__lint">
       ¿Olvido su contraseña?
     </a>
+    <button mat-flat-button class="w-full" type="button" (click)="onClickSubmit()">
+      Iniciar sesión
+    </button>
   </section>
-  <button pButton pRipple class="w-full" type="button" (click)="onClickSubmit()">
-    Iniciar sesión
-  </button>
 </form>

@@ -1,6 +1,5 @@
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter, withRouterConfig} from '@angular/router';
-import {routes} from './app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {APP_ROUTES} from '@core/infrastructure/routes/app.routes';
 import {provideTranslateService, TranslateLoader} from '@ngx-translate/core';
@@ -19,7 +18,6 @@ export const appConfig: ApplicationConfig = {
       ),
       provideAnimations(),
       provideZoneChangeDetection({eventCoalescing: true}),
-      provideRouter(routes),
       provideHttpClient(),
       provideTranslateService({
         loader: {

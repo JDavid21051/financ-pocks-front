@@ -6,6 +6,12 @@ header {
     border-radius: 50%;
     filter: drop-shadow(3px 0 10px rgba(255, 255, 255, 0.5));
   }
+  .mat-mdc-mini-fab {
+    background-color: var(--pock-primary-100);
+    & mat-icon {
+      color: var(--teal-900);
+    }
+  }
 
   ul {
     min-height: 58px;

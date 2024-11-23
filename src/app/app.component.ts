@@ -1,6 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {PrimeNGConfig} from 'primeng/api';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -8,11 +7,7 @@ import {PrimeNGConfig} from 'primeng/api';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'financ-pocks-front';
-  private readonly primengConfig = inject(PrimeNGConfig);
 
-  ngOnInit(): void {
-    this.primengConfig.ripple = true;
-  }
 }

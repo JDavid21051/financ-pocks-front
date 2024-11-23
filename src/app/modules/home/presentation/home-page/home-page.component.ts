@@ -4,9 +4,8 @@ import { Component } from '@angular/core';
   selector: 'pock-home',
   standalone: true,
   imports: [],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './home-page.component.html'
 })
-export class HomeComponent {
+export class HomePageComponent {
 
 }

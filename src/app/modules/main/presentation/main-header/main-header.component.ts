@@ -1,49 +1,51 @@
 import {Component, inject} from '@angular/core';
-import {ButtonDirective} from 'primeng/button';
-import {Ripple} from 'primeng/ripple';
 import {TranslatePipe} from '@ngx-translate/core';
 import {FormGroup, NonNullableFormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {LanguageFormInterface, LanguageOptionType} from '@modules/main/lib/models/language-forms.models';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {TooltipModule} from 'primeng/tooltip';
 import {NgOptimizedImage} from '@angular/common';
-import {RouterLink} from '@angular/router';
-import {AvatarModule} from 'primeng/avatar';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
+import {MatAnchor, MatMiniFabButton} from '@angular/material/button';
+import {MatTooltip} from '@angular/material/tooltip';
+import {MatIconModule} from '@angular/material/icon';
+import {LinkLogoComponent} from '@shared/design/molecules/link-logo/link-logo.component';
 
 @Component({
   selector: 'pock-main-header',
   standalone: true,
   imports: [
-    ButtonDirective,
-    Ripple,
     TranslatePipe,
     ReactiveFormsModule,
-    SelectButtonModule,
-    TooltipModule,
     NgOptimizedImage,
     RouterLink,
-    AvatarModule,
+    RouterLinkActive,
+    LinkLogoComponent,
+    MatIconModule,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    MatMiniFabButton,
+    MatTooltip,
+    MatAnchor,
   ],
   templateUrl: './main-header.component.html',
-  styleUrl: './main-header.component.scss'
+  styleUrl: './main-header.component.scss',
 })
 export class MainHeaderComponent {
   private readonly builder = inject(NonNullableFormBuilder);
   readonly form: FormGroup<LanguageFormInterface> = this.builder.group<LanguageFormInterface>({
-    lang: this.builder.control('en'),
+    lang: this.builder.control('es'),
   });
-  readonly logoUrl = 'images/logotype.png';
   readonly langOptions: { value: LanguageOptionType, label: string, tooltip: string }[] = [
     {
       label: 'app.header.lang.toggle.es.label',
       value: 'es',
-      tooltip: 'app.header.lang.toggle.es.tooltip'
+      tooltip: 'app.header.lang.toggle.es.tooltip',
     },
     {
       label: 'app.header.lang.toggle.en.label',
       value: 'en',
-      tooltip: 'app.header.lang.toggle.es.tooltip'
-    }
+      tooltip: 'app.header.lang.toggle.es.tooltip',
+    },
   ];
 
   readonly menuItems: { label: string, route: string }[] = [
@@ -52,16 +54,25 @@ export class MainHeaderComponent {
       route: 'home',
     },
     {
-      label: 'entidades',
+      label: 'Gastos',
+      route: 'expenses',
+    },
+    {
+      label: 'Entidades',
       route: 'entities',
     },
     {
-      label: 'servicios',
+      label: 'Servicios',
       route: 'services',
     },
+
     {
-      label: 'gastos',
-      route: 'expenses',
+      label: 'Cuentas',
+      route: 'accounts',
+    },
+    {
+      label: 'Ahorros',
+      route: 'savings',
     },
   ];
 

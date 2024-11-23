@@ -3,8 +3,13 @@ import {Routes} from '@angular/router';
 export const APP_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'main',
     pathMatch: 'full',
+  },
+  {
+    path: 'example',
+    loadComponent: () => import('../../../example/example.component').then((c) => c.ExampleComponent),
+    title: 'Example',
   },
   {
     path: 'auth',
@@ -36,7 +41,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: 'home',
-        loadComponent: () => import('@modules/main/presentation/home'),
+        loadComponent: () => import('../../../modules/home/presentation/home-page'),
       },
       {
         path: '**',

@@ -1,0 +1,36 @@
+<header class="sticky top-0">
+  <ul class="m-0 px-3 flex gap-2 w-full h-fit justify-content-between align-items-center">
+    <pock-link-logo />
+    <section class="f_horizontal_center">
+      @for (item of menuItems; track item.route) {
+        <li>
+          <a mat-button
+             class="h-fit"
+             routerLinkActive="active"
+             [routerLink]="item.route">
+            {{ item.label }}
+          </a>
+        </li>
+      }
+    </section>
+    <section class="f_horizontal_center gap-3">
+      <form [formGroup]="form">
+        <mat-button-toggle-group name="languageControl"
+                                 formControlName="lang"
+                                 aria-label="Language Style"
+                                 [hideSingleSelectionIndicator]="true">
+          @for (item of langOptions; track item.value) {
+            <mat-button-toggle [value]="item.value">
+              {{ (item.label) | translate }}
+            </mat-button-toggle>
+          }
+        </mat-button-toggle-group>
+      </form>
+      <button mat-mini-fab aria-label="avatar button" class="fab__circle"
+              [matTooltip]="'Iniciar sesión'">
+        <mat-icon>person</mat-icon>
+      </button>
+    </section>
+  </ul>
+</header>
+
