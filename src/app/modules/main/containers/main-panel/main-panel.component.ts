@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pock-main-main',
+  selector: 'pock-design-design',
   standalone: true,
   imports: [],
   templateUrl: './main-panel.component.html',

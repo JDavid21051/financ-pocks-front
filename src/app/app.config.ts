@@ -2,10 +2,11 @@ import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter, withRouterConfig} from '@angular/router';
 import {routes} from './app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import {APP_ROUTES} from '@core/infa/routes/app.routes';
+import {APP_ROUTES} from '@core/infrastructure/routes/app.routes';
 import {provideTranslateService, TranslateLoader} from '@ngx-translate/core';
 import {HttpClient, provideHttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './i18n/', '.json');
@@ -28,6 +29,7 @@ export const appConfig: ApplicationConfig = {
         },
         defaultLanguage: 'en',
       }),
+      provideAnimationsAsync(),
     ],
   }
 ;

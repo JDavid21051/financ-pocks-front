@@ -4,6 +4,7 @@
 @import 'primeflex/themes/primeone-dark';
 @import "primeicons/primeicons.css";
 @import "extends/selected-button";
+@import "extends/input/input";
 @import "extends/button";
 @import "extends/avatar";
 @import "variables";
@@ -16,9 +17,10 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
+  background-color: var(--pock-bg-dark);
 }
 
-@mixin flex_fabric ($js, $al, $dir: 'column') {
+@mixin flex_fabric ($js, $al, $dir: column) {
   display: flex;
   flex-direction: $dir;
   justify-content: $js;
@@ -27,9 +29,14 @@ html, body {
 
 
 .f_horizontal_center {
-  @include flex_fabric(center, center);
+  @include flex_fabric(center, center, row);
 }
 
 .f_horizontal_btw_center {
-  @include flex_fabric(content-between, center);
+  @include flex_fabric(content-between, center, row);
 }
+
+.f_vertical_start_center {
+  @include flex_fabric(flex-start, center);
+}
+

@@ -7,3 +7,14 @@
 .p-button-text {
   color: var(--pock-text-color) !important;
 }
+
+button.p-button {
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+
+a.custom__lint {
+  color: var(--pock-info-300);
+  cursor: pointer;
+}
