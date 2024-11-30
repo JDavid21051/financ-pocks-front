@@ -6,7 +6,6 @@ import { MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {passwordValidator} from '@core/infrastructure/validators/password-validator';
-import {emailValidator} from '@core/infrastructure/validators/email-validator';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class LoginFormComponent {
   readonly onSubmit = output<LoginDTOInterface>();
   private readonly builder = inject(NonNullableFormBuilder);
   readonly form = this.builder.group<LoginFormInterface>({
-    username: this.builder.control('', { validators: emailValidator()}),
+    username: this.builder.control(''),
     password: this.builder.control('', { validators: passwordValidator()}),
   });
   passwordVisible = signal(false);

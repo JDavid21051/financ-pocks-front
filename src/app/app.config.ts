@@ -9,6 +9,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './i18n/', '.json');
+import { environment } from '../environments/environment';
+import {CoreHttpProvide} from '@core/infrastructure/provide/core-http.provide';
+import {provideAuth} from '@core/infrastructure/provide/auth.provide';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -28,6 +31,8 @@ export const appConfig: ApplicationConfig = {
         defaultLanguage: 'en',
       }),
       provideAnimationsAsync(),
+      CoreHttpProvide({baseUrl: `${environment.apiUrl}api`}),
+      provideAuth({redirectUri: '/main', returnTo: '/auth/login'}),
     ],
   }
 ;
