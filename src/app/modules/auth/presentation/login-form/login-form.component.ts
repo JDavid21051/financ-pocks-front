@@ -1,6 +1,6 @@
 import {Component, computed, inject, output, signal} from '@angular/core';
 import {NonNullableFormBuilder, ReactiveFormsModule} from '@angular/forms';
-import {LoginDTOInterface, LoginFormInterface} from '@core/domain/interfaces/auth/login.interfaces';
+import {LoginDTO, LoginFormInterface} from '@core/domain/interfaces/auth/login.interfaces';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -22,19 +22,18 @@ import {passwordValidator} from '@core/infrastructure/validators/password-valida
   styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
-  readonly onSubmit = output<LoginDTOInterface>();
+  readonly onSubmit = output<LoginDTO>();
   private readonly builder = inject(NonNullableFormBuilder);
   readonly form = this.builder.group<LoginFormInterface>({
-    username: this.builder.control(''),
     password: this.builder.control('', { validators: passwordValidator()}),
   });
-  passwordVisible = signal(false);
-  passwordIcon = computed(() => this.passwordVisible() ? 'visibility_off' :'visibility');
-  passwordFieldType = computed(() => this.passwordVisible() ? 'text' :'password');
+  readonly passwordVisible = signal(false);
+  readonly passwordIcon = computed(() => this.passwordVisible() ? 'visibility_off' :'visibility');
+  readonly passwordFieldType = computed(() => this.passwordVisible() ? 'text' :'password');
 
   onClickSubmit(): void {
     if (this.form.valid) {
-      const data: LoginDTOInterface = this.form.getRawValue();
+      const data: LoginDTO = this.form.getRawValue();
       this.onSubmit.emit(data);
     } else {
       this.form.markAllAsTouched();

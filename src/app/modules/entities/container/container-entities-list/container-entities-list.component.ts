@@ -1,28 +1,22 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {EntitiesStore} from '@core/infrastructure/store/financial-entities/entities.store';
-import {JsonPipe} from '@angular/common';
+import {EntityStore} from '@core/infrastructure/store/financial-entities/entities.store';
+import {SpinnerComponent} from '@shared/design/atom/spinner/spinner.component';
+import {EntitiesListComponent} from '@modules/entities/feature/entities-list/entities-list.component';
 
 @Component({
   selector: 'pock-container-entities-list',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [SpinnerComponent, EntitiesListComponent],
   templateUrl: './container-entities-list.component.html',
   styleUrl: './container-entities-list.component.scss',
+  providers: [EntityStore],
 })
 export class ContainerEntitiesListComponent implements OnInit {
-  list: any[] = [];
-  private readonly serviceList = inject(EntitiesStore);
-
+  private readonly entityStore = inject(EntityStore);
+  readonly entityList = this.entityStore.list;
+  readonly isLoading = this.entityStore.isLoading;
 
   ngOnInit(): void {
-    this.serviceList.list().subscribe({
-      next: (list) => {
-        console.log(list);
-        this.list = list;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
+    this.entityStore.loadData();
   }
 }

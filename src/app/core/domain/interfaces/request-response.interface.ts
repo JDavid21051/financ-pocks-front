@@ -1,15 +1,10 @@
-import {HttpContext, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpContext, HttpHeaders} from '@angular/common/http';
+import {CoreCodeErrosEnum} from '@core/domain/enums/code-errors.enum';
+import {CoreExceptionFactory} from '@core/domain/class/core-exception-factory';
 
-export enum ResponseCode {
-  api = 'api_error',
-  database = 'database_error',
-  server = 'server_error',
-  unknown = 'unknown_error',
-  success = 'success',
-}
-
-export interface BaseErrorResponse extends HttpErrorResponse {
-  code: ResponseCode | string;
+export interface BaseErrorResponse {
+  readonly code: string;
+  readonly message: string;
 }
 
 export interface BaseRequestResponse<T, E extends BaseErrorResponse = BaseErrorResponse> {
@@ -35,27 +30,14 @@ export interface FailedResponse<E extends BaseErrorResponse = BaseErrorResponse>
 export type RequestResponse<T, E extends BaseErrorResponse = BaseErrorResponse> = SuccessResponse<T> | FailedResponse<E>
 
 
-export function successResponseFactory<T>(
-  data: T,
-  options: Partial<SuccessResponse<T>> = {}
-): SuccessResponse<T> {
-  return {
-    success: true,
-    code: ResponseCode.success,
-    message: ResponseCode.success,
-    data: data,
-    ...options
-  };
-}
-
 export function errorResponseFactory(
   errors: BaseErrorResponse[],
   options: Partial<FailedResponse> = {}
 ): FailedResponse {
   return {
     success: false,
-    code: ResponseCode.unknown,
-    message: ResponseCode.unknown,
+    code: CoreCodeErrosEnum.unknown,
+    message: CoreCodeErrosEnum.unknown,
     errors,
     ...options
   };
@@ -67,12 +49,15 @@ export interface RequestOptions {
 }
 
 export function mapResponse<T>(response: RequestResponse<T>): T {
-  if (!response.success) {
-    const [error] = response.errors;
-    throw error;
-  }
+  if (!response.success) throw CoreExceptionFactory.createError(response);
   if (typeof response.data === 'string') return JSON.parse(response.data);
   return response.data;
+}
+
+export function mapResponseError(response: unknown): unknown {
+  console.log(response);
+  if (response) throw (<Record<string, unknown>><unknown>response)['error'];
+  return response;
 }
 
 export function serializer<T extends object>(

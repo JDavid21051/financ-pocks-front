@@ -1,23 +1,18 @@
-<form [formGroup]="form" class="f_vertical_start_center gap-2">
-  <section class="w-full hidden">
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Correo electrónico</mat-label>
-      <input formControlName="username" matInput placeholder="correo@mail.com">
-      <mat-icon matSuffix>mail</mat-icon>
-    </mat-form-field>
-  </section>
+<form [formGroup]="form" class="f_vertical_start_center gap-2" (ngSubmit)="onClickSubmit()">
   <section class="w-full">
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Contraseña</mat-label>
       <input formControlName="password" matInput placeholder="************" [type]="passwordFieldType()">
-      <mat-icon matSuffix class="cursor-pointer" (click)="onClickTogglePasswordVisibility()">{{passwordIcon()}}</mat-icon>
+      <mat-icon matSuffix class="cursor-pointer" (click)="onClickTogglePasswordVisibility()">
+        {{ passwordIcon() }}
+      </mat-icon>
     </mat-form-field>
   </section>
   <section class="w-full flex flex-column gap-3 align-items-end justify-content-end">
     <a class="custom__lint">
       ¿Olvido su secreto?
     </a>
-    <button mat-flat-button class="w-full" type="button" (click)="onClickSubmit()">
+    <button mat-flat-button class="w-full" type="submit" [disabled]="form.invalid">
       Acceder
     </button>
   </section>

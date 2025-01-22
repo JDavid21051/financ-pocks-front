@@ -1,9 +1,13 @@
 @import 'primeflex/primeflex';
 @import 'primeflex/themes/primeone-dark';
-@import "extends/selected-button";
-@import "extends/input/input";
-@import "extends/button";
+
 @import "extends/avatar";
+@import "extends/button";
+@import "extends/input/input";
+@import "extends/table/table";
+@import "extends/selected-button";
+@import "extends/snack";
+@import "extends/spinner";
 @import "variables";
 
 * {

@@ -2,11 +2,12 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpContext, HttpHeaders} from '@angular/common/http';
 import {BASE_URL} from '@core/infrastructure/token/base-url.token';
 import {
-  mapResponse,
+  mapResponse, mapResponseError,
   RequestResponse,
   serializer,
 } from '@core/domain/interfaces/request-response.interface';
 import {map} from 'rxjs/operators';
+import {catchError, Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,10 @@ export class BaseRequestService {
     const url = `${this.baseUrl}/${name}`;
     return this.http
       .post<RequestResponse<ResponsePayload>>(url, payload, options)
-      .pipe(map((data) => mapResponse(data)));
+      .pipe(
+        map((data) => mapResponse(data)),
+        catchError((error) => <Observable<ResponsePayload>>of(<ResponsePayload>mapResponseError(<unknown>error)))
+      );
   }
 
   path<ResponsePayload, CommandPayload = unknown>(
@@ -60,4 +64,5 @@ export class BaseRequestService {
       .delete<RequestResponse<ResponsePayload>>(url, { params, ...options })
       .pipe(map((data) => mapResponse(data)));
   }
+
 }

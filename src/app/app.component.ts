@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -7,7 +8,10 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'financ-pocks-front';
+export class AppComponent implements OnInit {
+
+  ngOnInit(): void {
+    console.log({'asda':'mostrar'});
+  }
 
 }

@@ -1,0 +1,17 @@
+table {
+  & thead {
+
+  }
+  & tbody {
+    & tr {
+
+      &:nth-child(even) {
+        background: var(--pock-primary-905) !important;
+      }
+
+      &:hover {
+        background: var(--pock-primary-990) !important;
+      }
+    }
+  }
+}

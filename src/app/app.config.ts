@@ -1,17 +1,17 @@
-import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter, withRouterConfig} from '@angular/router';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {APP_ROUTES} from '@core/infrastructure/routes/app.routes';
 import {provideTranslateService, TranslateLoader} from '@ngx-translate/core';
-import {HttpClient, provideHttpClient} from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { environment } from '../environments/environment';
+import {provideAuth} from '@core/infrastructure/provide/auth.provide';
+import {authInterceptor} from '@core/infrastructure/interceptors/auth.interceptor';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './i18n/', '.json');
-import { environment } from '../environments/environment';
-import {CoreHttpProvide} from '@core/infrastructure/provide/core-http.provide';
-import {provideAuth} from '@core/infrastructure/provide/auth.provide';
+
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -19,20 +19,27 @@ export const appConfig: ApplicationConfig = {
         APP_ROUTES,
         withRouterConfig({paramsInheritanceStrategy: 'always', onSameUrlNavigation: 'reload'}),
       ),
-      provideAnimations(),
       provideZoneChangeDetection({eventCoalescing: true}),
-      provideHttpClient(),
+      provideHttpClient(withInterceptors([authInterceptor])),
+      provideAnimations(),
       provideTranslateService({
         loader: {
           provide: TranslateLoader,
-          useFactory: httpLoaderFactory,
+          useFactory: (httpLoaderFactory),
           deps: [HttpClient],
         },
-        defaultLanguage: 'en',
+        defaultLanguage: 'es',
       }),
-      provideAnimationsAsync(),
-      CoreHttpProvide({baseUrl: `${environment.apiUrl}api`}),
-      provideAuth({redirectUri: '/main', returnTo: '/auth/login'}),
+      {
+        provide: LOCALE_ID,
+        useValue: 'es-CO',
+      },
+      provideAuth({
+        redirectUri: 'main/home',
+        returnTo: 'auth/login',
+        snackbarDuration: 10,
+        baseUrl: `${environment.apiUrl}api`
+      }),
     ],
   }
 ;

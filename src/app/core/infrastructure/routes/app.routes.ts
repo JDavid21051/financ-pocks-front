@@ -1,4 +1,5 @@
 import {Routes} from '@angular/router';
+import {authenticationGuard} from '@core/infrastructure/guards/auth.guard';
 
 export const APP_ROUTES: Routes = [
   {
@@ -21,7 +22,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: 'login',
-        loadComponent: () => import('../../../modules/auth/container/auth-login'),
+        loadComponent: () => import('@modules/auth/container/auth-login'),
         title: 'Iniciar sesión',
       },
       {
@@ -42,6 +43,7 @@ export const APP_ROUTES: Routes = [
       {
         path: 'home',
         loadComponent: () => import('@modules/home/presentation/home-page'),
+        canActivate: [authenticationGuard],
       },
       {
         path: 'entities',
@@ -53,7 +55,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: 'accounts',
-        loadComponent: () => import('@modules/accounts/container/container-accoutns-list'),
+        loadComponent: () => import('../../../modules/accounts/container/container-accounts-list'),
       },
       {
         path: '**',
@@ -65,5 +67,6 @@ export const APP_ROUTES: Routes = [
   {
     path: '**',
     redirectTo: 'auth',
+    pathMatch: 'full',
   },
 ];

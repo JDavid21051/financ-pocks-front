@@ -1,0 +1,9 @@
+<div class="relative">
+  <pock-spinner [visible]="isLoading()"/>
+  @if (accountList().length > 0) {
+    <section class="list_container pt-6 px-5">
+      <pock-accounts-list [data]="accountList()"/>
+    </section>
+  }
+</div>
+

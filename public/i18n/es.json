@@ -3,6 +3,18 @@
     "header": {
       "logo": {
         "alt": "Logotipo de Financial pockets"
+      },
+      "lang": {
+        "toggle": {
+          "es": {
+            "label": "ES",
+            "tooltip": "Selecciona el idioma español"
+          },
+          "en": {
+            "label": "EN",
+            "tooltip": "Selecciona el idioma inglés"
+          }
+        }
       }
     }
   }

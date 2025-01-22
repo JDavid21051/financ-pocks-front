@@ -1,2 +1,11 @@
-<p>container-entities-list works!</p>
-{{list | json}}
+<div class="relative">
+  <pock-spinner [visible]="isLoading()"/>
+  @if (entityList().length > 0) {
+    <section class="list_container pt-6 px-5">
+      <pock-entities-list [data]="entityList()"/>
+    </section>
+  }
+</div>
+
+
+

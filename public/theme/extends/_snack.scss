@@ -1,0 +1,25 @@
+@mixin snack($color, $bg) {
+  color: $color;
+  border-radius: 8px;
+  background-color: $bg;
+  button {
+    & .mdc-button__label {
+      color: $color;
+      font-size: 1rem;
+    }
+  }
+  .mat-mdc-snack-bar-label {
+    font-weight: 600;
+  }
+}
+
+mat-snack-bar-container {
+  margin-bottom: 2rem !important;
+  &.snack_error > .mdc-snackbar__surface.mat-mdc-snackbar-surface {
+    @include snack(var(--pock-white), var(--pock-error-400));
+  }
+
+  &.snack_success > .mdc-snackbar__surface.mat-mdc-snackbar-surface {
+    @include snack(var(--pock-success-975), var(--pock-success-300));
+  }
+}

@@ -20,15 +20,17 @@
                                  [hideSingleSelectionIndicator]="true">
           @for (item of langOptions; track item.value) {
             <mat-button-toggle [value]="item.value">
-              {{ (item.label) | translate }}
+              {{ item.label | translate }}
             </mat-button-toggle>
           }
         </mat-button-toggle-group>
       </form>
-      <button mat-mini-fab aria-label="avatar button" class="fab__circle"
+      <button mat-mini-fab aria-label="avatar button" routerLink="/auth/logion" class="fab__circle"
               [matTooltip]="'Iniciar sesión'">
         <mat-icon>person</mat-icon>
       </button>
+      <button mat-raised-button (click)="onClickLogout()">Cerrar sesión</button>
+
     </section>
   </ul>
 </header>
