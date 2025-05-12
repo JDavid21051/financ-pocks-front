@@ -25,12 +25,10 @@
           }
         </mat-button-toggle-group>
       </form>
-      <button mat-mini-fab aria-label="avatar button" routerLink="/auth/logion" class="fab__circle"
-              [matTooltip]="'Iniciar sesión'">
+      <button mat-mini-fab aria-label="avatar button" (click)="clickAvatar.emit()" class="fab__circle"
+              [matTooltip]="'Información del usuario'">
         <mat-icon>person</mat-icon>
       </button>
-      <button mat-raised-button (click)="onClickLogout()">Cerrar sesión</button>
-
     </section>
   </ul>
 </header>

@@ -7,4 +7,5 @@ export const initialAuthState: AuthStateInterface = {
   refreshing: false,
   refreshTokenEndDate: '',
   isAuthenticated: false,
+  userId: -1,
 };

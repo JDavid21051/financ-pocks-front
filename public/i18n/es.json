@@ -1,5 +1,24 @@
 {
   "app": {
+    "main": {
+      "userData": {
+        "buttons": {
+          "logout": "Cerrar sesión",
+          "closePanel": "Salir"
+        },
+        "data": {
+          "header": "Datos del usuario",
+          "name": "Nombres",
+          "lastName": "Apellidos",
+          "role": "Rol del usuario",
+          "date": "Fecha de nacimiento"
+        }
+      },
+      "roles": {
+        "superUser": "Super usuario",
+        "superAdmin": "Super administrador"
+      }
+    },
     "header": {
       "logo": {
         "alt": "Logotipo de Financial pockets"

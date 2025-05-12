@@ -4,7 +4,7 @@ import {BASE_URL} from '@core/infrastructure/token/base-url.token';
 import {
   mapResponse, mapResponseError,
   RequestResponse,
-  serializer,
+  serializer, serializerGetParams,
 } from '@core/domain/interfaces/request-response.interface';
 import {map} from 'rxjs/operators';
 import {catchError, Observable, of} from 'rxjs';
@@ -21,10 +21,10 @@ export class BaseRequestService {
     payload?: QueryPayload,
     options?: { headers?: HttpHeaders; context?: HttpContext },
   ) {
-    const url = `${this.baseUrl}/${name}`;
-    const params = serializer(payload);
+    const params = serializerGetParams(payload);
+    const url = `${this.baseUrl}/${name}/${params}`;
     return this.http
-      .get<RequestResponse<ResponsePayload>>(url, { params, ...options })
+      .get<RequestResponse<ResponsePayload>>(url, { ...options })
       .pipe(map((data) => mapResponse(data)));
   }
 

@@ -7,6 +7,7 @@ export interface AppAuthEndpoints {
   login: string;
   logout: string;
   refresh: string;
+  currentUser: string;
 }
 
 export interface AppEndpointsModel {
@@ -21,6 +22,7 @@ export const AppEndpointsData: AppEndpointsModel = {
   auth: {
     login: 'auth/bG9naW4tYXBw',
     logout: 'auth/logout',
-    refresh: 'auth/refresh-token'
+    refresh: 'auth/refresh-token',
+    currentUser: 'auth/user',
   },
 };

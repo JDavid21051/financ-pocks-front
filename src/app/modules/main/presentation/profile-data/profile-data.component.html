@@ -1,0 +1,18 @@
+<div class="grid">
+  <section class="col-12 flex flex-column">
+    <span class="font-bold text-sm">{{ 'app.main.userData.data.name' | translate }}</span>
+    <span class="font-light">{{ data().firstName }}</span>
+  </section>
+  <section class="col-12 flex flex-column">
+    <span class="font-bold text-sm">{{ 'app.main.userData.data.lastName' | translate }}</span>
+    <span class="font-light">{{ data().lastName }}</span>
+  </section>
+  <section class="col-12 flex flex-column">
+    <span class="font-bold text-sm">{{ 'app.main.userData.data.role' | translate }}</span>
+    <span class="font-light">{{ (userRole()) | translate }}</span>
+  </section>
+  <section class="col-12 flex flex-column">
+    <span class="font-bold text-sm">{{ 'app.main.userData.data.date' | translate }}</span>
+    <span class="font-light">{{ ((data().enteredAt) | translate) | date: 'medium' }}</span>
+  </section>
+</div>

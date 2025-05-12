@@ -8,6 +8,7 @@ import {AuthDataStateInterface} from '@core/domain/interfaces/auth/auth-state.in
 import {SHOULD_INTERCEPT_REQUEST} from '@core/infrastructure/context-tokens/auth-intercept-req.token';
 import {HttpContext} from '@angular/common/http';
 import {LogoutDTO} from '@core/domain/interfaces/auth/logout.interface';
+import {CurrentUserDTO, CurrentUserInterface} from '@core/domain/interfaces/auth/current-user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,5 +29,9 @@ export class AuthRepository {
   refreshToken(params: RefreshDTO): Observable<AuthDataStateInterface> {
     return this.#http.post<AuthDataStateInterface, RefreshDTO>(this.#auth.refresh, params, {context: this.shouldInterceptContext});
   };
+
+  getUserData(params: CurrentUserDTO): Observable<CurrentUserInterface> {
+    return this.#http.get<CurrentUserInterface, CurrentUserDTO>(this.#auth.currentUser, params);
+  }
 
 }

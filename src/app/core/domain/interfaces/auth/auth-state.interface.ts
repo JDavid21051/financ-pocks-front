@@ -3,6 +3,7 @@ export interface AuthDataStateInterface {
   accessTokenEndDate: string;
   refreshToken: string;
   refreshTokenEndDate: string;
+  userId: number;
 }
 
 interface BaseAuthStateInterface {

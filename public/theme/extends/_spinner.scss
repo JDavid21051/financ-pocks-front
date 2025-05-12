@@ -1,4 +1,5 @@
 .spinner_overlay {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgb(228 228 233 / 20%);
+  backdrop-filter: blur(2px);
   z-index: 9999;
 }

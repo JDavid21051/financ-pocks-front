@@ -1,5 +1,10 @@
-<main>
-  <pock-main-header />
-  <router-outlet/>
+<main class="h-full">
+  <mat-drawer-container class="h-screen bg-transparent" [hasBackdrop]="true">
+    <mat-drawer [opened]="openPanel()" position="end" mode="over" [disableClose]="true">
+      <pock-container-profile-panel [isOpen]="openPanel()" (closePanel)="onClosePanel()" (clickLogout)="onClickLogout()"/>
+    </mat-drawer>
+    <pock-main-header (clickAvatar)="onTogglePanel()"/>
+    <router-outlet/>
+  </mat-drawer-container>
 </main>
 

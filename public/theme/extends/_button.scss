@@ -9,3 +9,17 @@ a.custom__lint {
   color: var(--mdc-outlined-button-label-text-color);
   cursor: pointer;
 }
+
+button.mat-mdc-mini-fab:not(:disabled) {
+  color: var(--mdc-filled-button-label-text-color, var(--mat-app-on-primary));
+  background-color: var(--mdc-filled-button-container-color, var(--mat-app-primary));
+}
+
+button.mat-warn {
+/*  background-color: var(--pock-error-900);
+  color: var(--pock-error-100);
+
+  & .mdc-button__label {
+    // color: var(--pock-error-100);
+  }*/
+}

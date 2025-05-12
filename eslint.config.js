@@ -20,7 +20,11 @@ export default [
         'warn'
       ],
       '@typescript-eslint/no-magic-numbers': [
-        'error'
+        'error',
+        {
+          'ignore': [0, 1],
+          "ignoreArrayIndexes": true
+        }
       ],
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -45,6 +49,10 @@ export default [
       'no-extra-semi': 'off',
       'no-magic-numbers': [
         'error',
+        {
+          'ignore': [0, 1],
+          "ignoreArrayIndexes": true
+        }
       ],
       'no-unused-vars': [
         'error',

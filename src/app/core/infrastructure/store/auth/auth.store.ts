@@ -28,9 +28,7 @@ export class AuthStore {
   private readonly router = inject(Router);
   private readonly redirectAfterLoginUri = inject(AUTH_REDIRECT_URI);
 
-  constructor(
-    @Inject(AUTH_RETURN_TO) private readonly redirectAfterLogoutUri: string
-  ) {
+  constructor(@Inject(AUTH_RETURN_TO) private readonly redirectAfterLogoutUri: string) {
     this.initEffects();
     this.initStore();
   }
@@ -40,10 +38,9 @@ export class AuthStore {
     this.state$.next(initialAuthState);
   }
 
-  protected get signalState():  Signal<AuthStateInterface> {
+  get currentState(): Signal<AuthStateInterface> {
     return <Signal<AuthStateInterface>>toSignal(this.state$);
   }
-
 
   private initStore(): void {
     const state = this.authStorage.get();
@@ -61,7 +58,7 @@ export class AuthStore {
       }),
     ),
   );
-  readonly refreshTokenIsExpired = computed(()=> {
+  readonly refreshTokenIsExpired = computed(() => {
     const state = this.state$.value;
     if (!state.isAuthenticated) return true;
     const refreshTokenEndDate = new Date(state.refreshTokenEndDate);
@@ -93,7 +90,6 @@ export class AuthStore {
       }),
     ),
   );
-
 
   readonly refreshing$ = this.state$.pipe(map((state) => (state.isAuthenticated ? state.refreshing : false)));
 
@@ -138,6 +134,7 @@ export class AuthStore {
             refreshTokenEndDate: payload.refreshTokenEndDate,
             isAuthenticated: true,
             refreshing: false,
+            userId: payload.userId,
           };
           this.authStorage.set(newState);
           this.state$.next(newState);
@@ -173,7 +170,10 @@ export class AuthStore {
           const state = this.state$.value;
           if (!state.isAuthenticated) return EMPTY;
           this.state$.next({...state, refreshing: true});
-          return this.authRepository.refreshToken({refreshToken: state.refreshToken, accessToken: state.accessToken}).pipe(
+          return this.authRepository.refreshToken({
+            refreshToken: state.refreshToken,
+            accessToken: state.accessToken,
+          }).pipe(
             signalResponse(
               (response) => {
                 this.grantAccess({
@@ -181,6 +181,7 @@ export class AuthStore {
                   accessTokenEndDate: response.accessTokenEndDate,
                   refreshTokenEndDate: response.refreshTokenEndDate,
                   refreshToken: response.refreshToken,
+                  userId: response.userId,
                 });
               },
               () => {

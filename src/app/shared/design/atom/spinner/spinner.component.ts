@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
@@ -13,9 +13,9 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
         <mat-spinner />
       </div>
     }
-
   `,
-  styleUrl: './spinner.component.scss'
+  styleUrl: './spinner.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpinnerComponent {
   visible = input.required<boolean>();

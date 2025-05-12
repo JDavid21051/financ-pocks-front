@@ -1,0 +1,18 @@
+<div class="flex flex-column gap-3 p-4">
+  <section clasS="flex justify-content-between">
+    <h5>{{ 'app.main.userData.data.header' | translate }}</h5>
+    <button mat-mini-fab color="warn" aria-label="Icon button to close the sidenav" class="border-circle"
+            [matTooltip]="'app.main.userData.buttons.closePanel' | translate" (click)="closePanel.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </section>
+  @if (dataUser()) {
+    <pock-profile-data [data]="getDataUser()"/>
+  }
+  <section class="col-12 flex mb-0 mt-auto">
+    <button mat-flat-button color="warn" (click)="clickLogout.emit()">
+      <mat-icon>logout</mat-icon>
+      {{ 'app.main.userData.buttons.logout' | translate }}
+    </button>
+  </section>
+</div>

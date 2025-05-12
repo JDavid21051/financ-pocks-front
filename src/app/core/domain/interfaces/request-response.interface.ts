@@ -75,3 +75,12 @@ export function serializer<T extends object>(
     return { ...acc, [key]: value };
   }, {});
 }
+
+export function serializerGetParams<T extends object>(
+  params?: T | null | undefined
+): string {
+  if (!params) return '';
+  const listParams = Object.values(params);
+  if (listParams.length === 0) return '';
+  return listParams.toString().replaceAll(',','/');
+}

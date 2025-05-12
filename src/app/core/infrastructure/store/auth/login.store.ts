@@ -7,6 +7,7 @@ import {signalResponse} from '@core/domain/functions/hanlders-response';
 import {AuthRepository} from '@core/infrastructure/repository/auth/auth.repository';
 import {LoginDTO} from '@core/domain/interfaces/auth/login.interfaces';
 import {AuthStore} from '@core/infrastructure/store/auth/auth.store';
+import {UserLoggedState} from '@core/infrastructure/store/current-user/user-logged-state';
 
 export interface LoginStateModel {
   loading: boolean;
@@ -27,7 +28,14 @@ export const LoginStore = signalStore(
     repo: AuthRepository = inject(AuthRepository),
     authStore: AuthStore = inject(AuthStore),
     snack: SnackService = inject(SnackService),
+    currentUser = inject(UserLoggedState)
   ) => {
+    const setLoading = () => {
+      patchState(store, {
+        loading: true
+      });
+    };
+
     const login = rxMethod<LoginDTO>(($) => {
       return $.pipe(
         tap(() => patchState(store, { loading: true })),
@@ -41,9 +49,11 @@ export const LoginStore = signalStore(
                   accessTokenEndDate: response.enteredAt,
                   refreshToken: response.refreshToken,
                   refreshTokenEndDate: '',
+                  userId: response.userId,
                 });
                 patchState(store, { loading: false});
                 snack.showSuccess({message: 'Inicio de sesión exitoso'});
+                currentUser.getData({id: response.userId});
               },
               (error) => {
                 console.log(error);
@@ -62,7 +72,8 @@ export const LoginStore = signalStore(
     };
     return {
       login,
-      resetAuth
+      resetAuth,
+      setLoading
     };
   })
 );

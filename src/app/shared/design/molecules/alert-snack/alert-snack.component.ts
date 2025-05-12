@@ -22,14 +22,14 @@ import {MatButton} from '@angular/material/button';
   styleUrl: './alert-snack.component.scss',
 })
 export class AlertSnackComponent {
-  readonly #snackBar = inject(MatSnackBarRef);
+  readonly #SnackBar = inject(MatSnackBarRef);
 
   get snackData() {
-    return this.#snackBar.instance.data;
+    return this.#SnackBar.instance.data;
   }
 
   onClickButton(): void {
-    this.#snackBar.dismissWithAction();
+    this.#SnackBar.dismissWithAction();
   }
 
 }
